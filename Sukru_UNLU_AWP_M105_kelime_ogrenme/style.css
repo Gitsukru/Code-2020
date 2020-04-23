@@ -1,0 +1,15 @@
+
+.bg-light {
+    background-color: #f8f9fa!important;
+}
+
+.bg-purple {
+    background-color: #6f42c1;
+}
+.form-check-input{
+    display: none;
+}
+
+.result-list-box > .btn{
+    pointer-events: none;
+}
