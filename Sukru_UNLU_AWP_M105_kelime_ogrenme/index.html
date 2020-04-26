@@ -5,11 +5,11 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="./style.css">
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="./style.css">
     <title>Vocabulaire quiz</title>
 </head>
 
@@ -22,21 +22,28 @@
                 <small>Bilgini genislet</small>
             </div>
         </div>
-
-        <div class="my-3 p-3 bg-white rounded shadow-sm">
+        <div class="my-3 p-3 bg-white rounded shadow-sm position-relative">
             <!-- <div class="row d-flex justify-content-end">
                 <button type="button" class="btn btn-success d-flex justify-content end">Success</button>
             </div> -->
-
-            <h6 class="border-bottom border-gray pb-2 mb-0">Sorular</h6>
-            <div class="accordion quiz-item-container" id="accordionExample">
-
+            <div class="timer-box alert alert-success">
+                <small class="mr-1">Timer</small>
+                <span class="badge badge-dark count-down-box">1:20</span>
+            </div>
+            <button
+                class="btn btn-success btn-lg btn-block d-flex align-items-center justify-content-center quiz-start-btn soldanGel">
+                <img class="quiz-start-img" src="https://image.flaticon.com/icons/svg/748/748890.svg" alt="">
+                <div class="quiz-start-text ">Start quiz</div>
+            </button>
+            <h2 class="pb-2 mb-0 question-title" style="display:none">Sorular</h2>
+            <div class="accordion quiz-item-container mt-5" id="accordionExample">
             </div>
         </div>
         <div class="my-3 p-3 bg-white rounded shadow-sm">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModalCenter">
-                Launch demo modal
+            <button type="button" class="btn btn-outline-danger show-result" style="display:none" data-toggle="modal"
+                data-target="#exampleModalCenter">
+                Sonuclari göster
             </button>
 
             <!-- Modal -->
@@ -52,56 +59,25 @@
                         </div>
                         <div class="modal-body">
                             <div class="result-list-box">
-                                <div class="btn btn-outline-success btn-block mb-2" role="alert">
-                                    <span class="badge badge-light mr-2">1-A</span>
-                                    A simple success alert—check it out!
-                                </div>
-                                <div class="btn btn-outline-danger btn-block mb-2" role="alert">
-                                    <span class="badge badge-light mr-2">2-A</span>
-                                    A simple danger alert—check it out!
-                                </div>
-                                <div class="btn btn-outline-success btn-block mb-2" role="alert">
-                                    <span class="badge badge-light mr-2">1-A</span>
-                                    A simple success alert—check it out!
-                                </div>
-                                <div class="btn btn-outline-danger btn-block mb-2" role="alert">
-                                    <span class="badge badge-light mr-2">2-A</span>
-                                    A simple danger alert—check it out!
-                                </div>
-                                <div class="btn btn-outline-success btn-block mb-2" role="alert">
-                                    <span class="badge badge-light mr-2">1-A</span>
-                                    A simple success alert—check it out!
-                                </div>
-                                <div class="btn btn-outline-danger btn-block mb-2" role="alert">
-                                    <span class="badge badge-light mr-2">2-A</span>
-                                    A simple danger alert—check it out!
-                                </div>
-                                <div class="btn btn-outline-success btn-block mb-2" role="alert">
-                                    <span class="badge badge-light mr-2">1-A</span>
-                                    A simple success alert—check it out!
-                                </div>
-                                <div class="btn btn-outline-danger btn-block mb-2" role="alert">
-                                    <span class="badge badge-light mr-2">2-A</span>
-                                    A simple danger alert—check it out!
-                                </div>
+
                             </div>
 
                             <div class="alert alert-primary mt-4" role="alert">
 
-                                <H2>Puanlariniz : 60/100</H2>
+                                <H2>Puanlariniz: <span class="total-point"></span> /100</H2>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </main>
     <script src="./app.js"></script>
+    <script src="./function.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
@@ -111,7 +87,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
-
 </body>
 
 </html>

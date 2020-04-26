@@ -1,29 +1,33 @@
 /**
- * Kelime Örenme
+ * Amaç insalarin kelime örenmesi
  * 
  * Akis
- * ====
- *  - ekranda kelime listesi olacak, (8adet)
- *  - bir tanesi secildiginde altinda 4 secenek, cevap,(kelime) olcak. 
- *  - biri dogru 3ü yanlis
- *  - kullanici birni sececek ve cevabi kayit edecek
- *  - 8 soruyu yaptiktan 
- *          - sorular bitince "netice" butonuna tilayacak ve kaç dogru kaç yanlis yaptigini görecek (puanlari yazacak)
+ *  
+ *  - Sayfa yüklendiginde start butonu gelecek basinca sorular siralanacak
+ *  - 10 soru olacak her sorunun 4 şıkkı olacak bir şık dogru cevabi olacak 
+ *  - bir tane sayac olsun ustte 2dk dan geri sayacak
+ *  - tum sorulari cevapladiktan sonra modal acilacak ve dogru cevap ve 
+ *        yanlislari görülecek puaniyla beraber
+ *  - süre bitmeden tüm sorulari cevaplamis olursa butona tiklayip sonuclari görecek 
  * 
- * Analiz
- *  - Ekrani ikiye böl ( 70% - 30%) 70i kelime listesi 30 skor olsun 
- *  - sol tarafa kelime listesi ve kelimeler tiklanabilir 
- *  - tikladiktan sonra cevapbi sec ve siradaki kelimeyi sec
- *  - sonucu butonuna tiklayinca modal acilsin ve sonuclar gosterilsin
+ * analiz
  * 
- * ======
+ *  - bir buton (start) sorulari baslatsin ve bir sayaç görünsün
+ *  - sorular gelince start butonu gizlensin sorular görünsün
+ *  - sayaç geriye dogru saymaya baslasın
+ *  - sorunun altinda 4 sik buton olsun ve her soru butona tıklayınca acılsın
+ *  - zaman bitince sonucu göster modal açılsın ve kac dogru kac yanlıs var görülsün
  */
-
-
 
 let quizItemTemplate = "",
    quizItemContainer = document.querySelector(".quiz-item-container"),
-   userSelectedAnswerContainer = document.querySelector(".result-list-box")
+   userSelectedAnswerContainer = document.querySelector(".result-list-box"),
+   showResult = document.querySelector(".show-result"),
+   userPoint = document.querySelector(".total-point"),
+   counter = document.querySelector(".count-down-box"),
+   startQuizBtn = document.querySelector(".quiz-start-btn"),
+   questionTitle = document.querySelector(".question-title")
+   timerBox = document.querySelector(".count-down-box");
 
 let quizData = [{
       questionsId: 1,
@@ -237,7 +241,6 @@ let quizData = [{
    }
 ]
 
-
 let correctAnswers = [{
       questionsId: 1,
       correctAnswer: "A"
@@ -280,56 +283,9 @@ let correctAnswers = [{
    }
 ]
 
-/**
- * kullanicinin sectifgi cevaplari tutacaggimiz degisken
- */
+//kullanicinin sectifgi cevaplari tutacaggimiz degisken
 let userSelectedAnswer = [];
 
-
-
-
-quizData.map(questionsItem => {
-   quizItemTemplate += `<div class="card">
-   <button class="btn btn-primary btn-lg btn-block mb-3" type="button" data-toggle="collapse"
-       data-target="#collapse-${questionsItem.questionsId}" aria-expanded="true" aria-controls="collapseOne">
-       ${questionsItem.questions}
-   </button>
-   <div id="collapse-${questionsItem.questionsId}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-       <div class="card-body d-flex ">
-       ${
-         questionsItem.answer.map(answerOptions => `
-         <div class="flex-fill">
-             <input class="form-check-input" type="radio" name="exampleRadios" id="opt-${questionsItem.questionsId}-${answerOptions.optC}"
-               onchange="setAnswer('${questionsItem.questionsId}', '${answerOptions.optC}', '${answerOptions.optT}')"
-             >
-             <label class="form-check-label btn btn-info d-block mx-2" for="opt-${questionsItem.questionsId}-${answerOptions.optC}">
-                 <span class="badge badge-light mr-2">${answerOptions.optC}</span>
-                 ${answerOptions.optT}
-             </label>
-         </div>`
-          ).join("")
-      }
-       </div>
-   </div>
-</div>`
-})
-
-quizItemContainer.innerHTML = quizItemTemplate;
-
-function setAnswer(id, sign, name) {
-   let newObj = {
-      questionId: parseInt(id),
-      answerSign: sign,
-      answerName: name
-   }
-   if (userSelectedAnswer.filter(item => item.questionId === parseInt(id)).length == 0) {
-      userSelectedAnswer.push(newObj);
-   } else {
-      userSelectedAnswer.filter(item => item.questionId === newObj.questionId)[0].answerSign = sign;
-      userSelectedAnswer.filter(item => item.questionId === newObj.questionId)[0].answerName = name;
-   }
-   
-   
-   console.log(userSelectedAnswer);
-
-}
+let refPoint = 100 / quizData.length
+//Sayaç degiskeni
+let timeFire;
